@@ -1,35 +1,21 @@
-import { Redirect, Route } from "react-router";
-import { Switch } from "react-router-dom";
-import AuthRoute from './auth';
-
-const constructRoute = ({ component: Component, ...rest }) => {
-  if (rest.isProtected) {
-    return true ? <Route {...rest} render={(props) => <Component {...props} />}></Route>
-      : <Redirect to="/auth" />
-  }
-  return <Route {...rest} render={(props) => <Component {...props} />}></Route>
-}
-
-const constructRoutes = (routes) => {
-  return routes.map(({ isProtected, children, ...rest }) => {
-    if (children.length) {
-      return children.map(childRoute => (
-        constructRoute({ ...childRoute, path: `${rest.path}${childRoute.path}` })
-      ))
-    } else {
-      return constructRoute(isProtected, rest)
-    }
-  });
-}
+import { Redirect, Switch } from "react-router-dom";
+import {
+  Dashboard, SignIn,
+  SignUp
+} from '../Containers';
+import PrivateRoute from '../Route/PrivateRoute';
+import PublicRoute from '../Route/PublicRoute';
 
 const routes = function () {
-  const AllRoute = constructRoutes(AuthRoute)
-  AllRoute.push(
-    <Redirect to="/auth/signin" />
-  )
   return (
     <Switch>
-      {AllRoute}
+      <PublicRoute path="/auth">
+        <PublicRoute exact path="/auth/signin" component={SignIn}></PublicRoute>
+        <PublicRoute exact path="/auth/signup" component={SignUp}></PublicRoute>
+        <Redirect to="/auth/signin" />
+      </PublicRoute>
+      <PrivateRoute path="/dashboard" component={Dashboard}></PrivateRoute>
+      <Redirect to="/auth/signin"></Redirect>
     </Switch>
   )
 }();

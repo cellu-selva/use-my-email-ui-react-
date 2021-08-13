@@ -1,11 +1,12 @@
 import React from "react";
 
-const SignUp = () => {
+const ListView = (props) => {
   return (
     <div>
-      Signup
+      List
     </div>
   )
 }
 
-export default SignUp;
+
+export default ListView;
