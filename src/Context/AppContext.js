@@ -1,12 +1,12 @@
 import { createContext, useEffect, useState } from "react";
 
 export const AppContext = createContext();
-
+const storage = sessionStorage;
 export const AppContextProvider = (props) => {
-  const [auth, setAuth] = useState(localStorage.getItem("auth") ?
-    JSON.parse(localStorage.getItem("auth")) : {});
+  const [auth, setAuth] = useState(storage.getItem("auth") ?
+    JSON.parse(storage.getItem("auth")) : {});
   useEffect(() => {
-    localStorage.setItem("auth", JSON.stringify(auth));
+    storage.setItem("auth", JSON.stringify(auth));
   }, [auth]);
   return (
     <AppContext.Provider

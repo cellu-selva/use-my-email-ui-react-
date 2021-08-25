@@ -3,16 +3,24 @@ import {
   useRouteMatch
 } from "react-router-dom";
 import PrivateRoute from '../../Route/PrivateRoute';
-import UserList from './UserList/UserList';
+import Sidebar from './Sidebar/Sidebar';
+import TestEmailList from './TestEmailList/TestEmailList';
 
 const Dashboard = (props) => {
   const match = useRouteMatch();
   return (
-    <div>
-      <PrivateRoute exact path={`${match.path}/users`} component={UserList}></PrivateRoute>
+    <div className="w-100">
       Dashboard
-      {props.children}
-    </div>
+      <div style={{ display: "flex" }}>
+        <div style={{ width: "240px" }}>
+          <Sidebar />
+        </div>
+        <div>
+          <PrivateRoute exact path={`${match.path}/users`} component={TestEmailList}></PrivateRoute>
+          {props.children}
+        </div>
+      </div>
+    </div >
   )
 }
 

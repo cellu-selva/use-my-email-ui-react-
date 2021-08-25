@@ -42,7 +42,7 @@ export const post = async (url, data) => {
 
 export const get = async (api, params) => {
   try {
-    const url = constructQueryParam(`${API_ENDPOINT}/api`, params);
+    const url = constructQueryParam(api, params);
     const resp = await fetch(`${API_ENDPOINT}/${url}`, {
       method: 'get',
       headers: {
@@ -60,7 +60,7 @@ export const get = async (api, params) => {
 
 export const put = async (api, data, params) => {
   try {
-    const url = constructQueryParam(`${API_ENDPOINT}/api`, params);
+    const url = constructQueryParam(`${API_ENDPOINT}/${api}`, params);
     const resp = await fetch(`${API_ENDPOINT}/${url}`, {
       method: 'put',
       headers: {
