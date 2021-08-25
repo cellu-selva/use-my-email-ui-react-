@@ -5,11 +5,11 @@ import ListView from "../../../PresentationalComponents/ListView";
 import { urlProperties } from "../../../Utils/constant";
 import { get } from "../../../Utils/rest-util";
 
-const CampaignList = (props) => {
+const MailServerList = (props) => {
   const [dataItems, setDataItems] = useState([]);
   useEffect(() => {
-    const { CAMPAIGN } = urlProperties;
-    get(CAMPAIGN)
+    const { MAIL_SERVER } = urlProperties;
+    get(MAIL_SERVER)
       .then(resp => {
         setDataItems(resp);
       })
@@ -17,35 +17,15 @@ const CampaignList = (props) => {
 
   const headers = [
     {
-      key: "name",
+      key: "key",
+      display: "Key"
+    },
+    {
+      key: "displayName",
       display: "Name"
     },
     {
-      key: "subject",
-      display: "Subject"
-    },
-    {
-      key: "fromMail",
-      display: "From Mail"
-    },
-    {
-      key: "bodyDomain",
-      display: "Body Domain"
-    },
-    {
-      key: "spanCheckInterval",
-      display: "Spam Check Interval"
-    },
-    {
-      key: "noOfMailsPerMinute",
-      display: "Mails Per/Min"
-    },
-    {
-      key: "message",
-      display: "Mesage"
-    },
-    {
-      key: "status",
+      key: "isActive",
       display: "Status"
     },
     {
@@ -64,4 +44,4 @@ const CampaignList = (props) => {
   )
 }
 
-export default CampaignList;
+export default MailServerList;

@@ -29,6 +29,10 @@ const OfferList = (props) => {
       display: "Status"
     },
     {
+      key: "updatedAt",
+      display: "Updated At"
+    },
+    {
       key: "actions",
       display: "Actions"
     },

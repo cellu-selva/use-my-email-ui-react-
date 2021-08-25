@@ -21,6 +21,10 @@ const SponsorList = (props) => {
       display: "Name"
     },
     {
+      key: "updatedAt",
+      display: "Updated At"
+    },
+    {
       key: "actions",
       display: "Actions"
     },
