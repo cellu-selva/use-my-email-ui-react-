@@ -5,6 +5,7 @@ import {
 import PrivateRoute from '../../Route/PrivateRoute';
 import CampaignList from "./Campaign/Campaign";
 import DomainList from "./Domain/Domain";
+import MailClientList from "./MailClient/MailClient";
 import MailServerList from "./MailServer/MailServer";
 import OfferList from "./Offer/Offer";
 import Sidebar from './Sidebar/Sidebar';
@@ -25,7 +26,7 @@ const Dashboard = (props) => {
           <PrivateRoute exact path={`${match.path}/campaign`} component={CampaignList}></PrivateRoute>
           <PrivateRoute exact path={`${match.path}/domain`} component={DomainList}></PrivateRoute>
           <PrivateRoute exact path={`${match.path}/email-template`} component={SubscriberList}></PrivateRoute>
-          <PrivateRoute exact path={`${match.path}/mail-client`} component={SubscriberList}></PrivateRoute>
+          <PrivateRoute exact path={`${match.path}/mail-client`} component={MailClientList}></PrivateRoute>
           <PrivateRoute exact path={`${match.path}/mail-server`} component={MailServerList}></PrivateRoute>
           <PrivateRoute exact path={`${match.path}/offers`} component={OfferList}></PrivateRoute>
           <PrivateRoute exact path={`${match.path}/test-email`} component={TestEmailList}></PrivateRoute>

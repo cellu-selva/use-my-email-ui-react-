@@ -1,5 +1,5 @@
 import React from "react";
-
+import { getProp } from '../Utils/functional-util';
 const ListView = (props) => {
   const {
     headers = [],
@@ -23,7 +23,12 @@ const ListView = (props) => {
             dataItems.length ? dataItems.map((item) => (
               <tr key={item.id}>
                 {headers.map((header) => {
-                  const value = item[header.key] ? item[header.key].toString() : ''
+                  let value
+                  if (header.key.indexOf('.') > -1) {
+                    value = getProp(item, `${header.key}`, '');
+                  } else {
+                    value = item[header.key] ? item[header.key].toString() : '';
+                  }
                   return <td key={header.key + item.id} className="border px-8 py-4">{value}</td>
                 })}
               </tr>
