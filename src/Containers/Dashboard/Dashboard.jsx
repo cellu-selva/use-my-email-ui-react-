@@ -4,6 +4,7 @@ import {
 } from "react-router-dom";
 import PrivateRoute from '../../Route/PrivateRoute';
 import Sidebar from './Sidebar/Sidebar';
+import SubscriberList from "./Subscriber/Subscriber";
 import TestEmailList from './TestEmailList/TestEmailList';
 
 const Dashboard = (props) => {
@@ -16,7 +17,8 @@ const Dashboard = (props) => {
           <Sidebar />
         </div>
         <div>
-          <PrivateRoute exact path={`${match.path}/users`} component={TestEmailList}></PrivateRoute>
+          <PrivateRoute exact path={`${match.path}/test-email`} component={TestEmailList}></PrivateRoute>
+          <PrivateRoute exact path={`${match.path}/subscriber`} component={SubscriberList}></PrivateRoute>
           {props.children}
         </div>
       </div>

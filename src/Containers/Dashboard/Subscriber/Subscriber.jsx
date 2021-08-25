@@ -4,32 +4,36 @@ import React, { useEffect, useState } from "react";
 import ListView from "../../../PresentationalComponents/ListView";
 import { urlProperties } from "../../../Utils/constant";
 import { get } from "../../../Utils/rest-util";
-const TestEmailList = (props) => {
+const SubscriberList = (props) => {
   const [dataItems, setDataItems] = useState([]);
   useEffect(() => {
-    const { TEST_EMAIL } = urlProperties;
-    get(TEST_EMAIL)
+    const { SUBSCRIBER } = urlProperties;
+    get(SUBSCRIBER)
       .then(resp => {
         setDataItems(resp);
       })
-  }, [])
+  }, []);
 
   const headers = [
     {
-      key: "name",
-      display: "Name"
+      key: "firsName",
+      display: "First Name"
     },
     {
-      key: "email",
-      display: "Email"
+      key: "lasName",
+      display: "Last Name"
     },
     {
-      key: "status",
-      display: "Status"
+      key: "dob",
+      display: "Date Of Birth"
     },
     {
       key: "updatedAt",
       display: "Last Updated"
+    },
+    {
+      key: 'city',
+      value: 'City'
     },
     {
       key: "actions",
@@ -43,4 +47,4 @@ const TestEmailList = (props) => {
   )
 }
 
-export default TestEmailList;
+export default SubscriberList;
