@@ -13,14 +13,14 @@ const ListView = (props) => {
           {
             <tr>
               {headers.map((header, index) => (
-                <th key={index} className="">{header.display}</th>
+                <th className="border px-8 py-4" key={index} >{header.display}</th>
               ))}
             </tr>
           }
         </thead>
         <tbody>
           {
-            dataItems.map((item) => (
+            dataItems.length ? dataItems.map((item) => (
               <tr key={item.id}>
                 {headers.map((header) => {
                   const value = item[header.key] ? item[header.key].toString() : ''
@@ -28,6 +28,8 @@ const ListView = (props) => {
                 })}
               </tr>
             ))
+              :
+              <tr key={'nodata'}>Nodata</tr>
           }
         </tbody>
       </table>

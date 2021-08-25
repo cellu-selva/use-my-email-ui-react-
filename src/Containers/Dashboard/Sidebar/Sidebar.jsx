@@ -13,7 +13,7 @@ const Sidebar = () => {
             <Link to="/dashboard/campaign">Campaign</Link>
           </li>
           <li>
-            <Link to="/dashboard/doomain">Domain</Link>
+            <Link to="/dashboard/domain">Domain</Link>
           </li>
           <li>
             <Link to="/dashboard/email-template">Email Temaplate</Link>

@@ -3,8 +3,10 @@ import {
   useRouteMatch
 } from "react-router-dom";
 import PrivateRoute from '../../Route/PrivateRoute';
+import DomainList from "./Domain/Domain";
 import OfferList from "./Offer/Offer";
 import Sidebar from './Sidebar/Sidebar';
+import SponsorList from "./Sponsor/Sponsor";
 import SubscriberList from "./Subscriber/Subscriber";
 import TestEmailList from './TestEmailList/TestEmailList';
 
@@ -19,14 +21,14 @@ const Dashboard = (props) => {
         </div>
         <div>
           <PrivateRoute exact path={`${match.path}/campaign`} component={SubscriberList}></PrivateRoute>
-          <PrivateRoute exact path={`${match.path}/domain`} component={SubscriberList}></PrivateRoute>
+          <PrivateRoute exact path={`${match.path}/domain`} component={DomainList}></PrivateRoute>
           <PrivateRoute exact path={`${match.path}/email-template`} component={SubscriberList}></PrivateRoute>
           <PrivateRoute exact path={`${match.path}/mail-client`} component={SubscriberList}></PrivateRoute>
           <PrivateRoute exact path={`${match.path}/mail-server`} component={SubscriberList}></PrivateRoute>
           <PrivateRoute exact path={`${match.path}/offers`} component={OfferList}></PrivateRoute>
           <PrivateRoute exact path={`${match.path}/test-email`} component={TestEmailList}></PrivateRoute>
           <PrivateRoute exact path={`${match.path}/subscriber`} component={SubscriberList}></PrivateRoute>
-          <PrivateRoute exact path={`${match.path}/sponsor`} component={SubscriberList}></PrivateRoute>
+          <PrivateRoute exact path={`${match.path}/sponsor`} component={SponsorList}></PrivateRoute>
           {props.children}
         </div>
       </div>
