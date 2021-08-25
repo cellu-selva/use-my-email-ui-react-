@@ -3,6 +3,7 @@ import {
   useRouteMatch
 } from "react-router-dom";
 import PrivateRoute from '../../Route/PrivateRoute';
+import CampaignList from "./Campaign/Campaign";
 import DomainList from "./Domain/Domain";
 import OfferList from "./Offer/Offer";
 import Sidebar from './Sidebar/Sidebar';
@@ -20,7 +21,7 @@ const Dashboard = (props) => {
           <Sidebar />
         </div>
         <div>
-          <PrivateRoute exact path={`${match.path}/campaign`} component={SubscriberList}></PrivateRoute>
+          <PrivateRoute exact path={`${match.path}/campaign`} component={CampaignList}></PrivateRoute>
           <PrivateRoute exact path={`${match.path}/domain`} component={DomainList}></PrivateRoute>
           <PrivateRoute exact path={`${match.path}/email-template`} component={SubscriberList}></PrivateRoute>
           <PrivateRoute exact path={`${match.path}/mail-client`} component={SubscriberList}></PrivateRoute>
