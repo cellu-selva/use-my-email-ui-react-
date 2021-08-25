@@ -5,6 +5,7 @@ const ListView = (props) => {
     headers = [],
     dataItems = [],
     style = "",
+    onRowClick,
   } = props;
   return (
     <React.Fragment>
@@ -29,7 +30,13 @@ const ListView = (props) => {
                   } else {
                     value = item[header.key] ? item[header.key].toString() : '';
                   }
-                  return <td key={header.key + item.id} className="border px-8 py-4">{value}</td>
+                  return <td
+                    key={header.key + item.id}
+                    className="border px-8 py-4"
+                    onClick={(e) => {
+                      onRowClick(e, item);
+                    }}
+                  >{value}</td>
                 })}
               </tr>
             ))

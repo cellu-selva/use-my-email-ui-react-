@@ -1,19 +1,23 @@
+
+
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
 import ListView from "../../../PresentationalComponents/ListView";
 import { urlProperties } from "../../../Utils/constant";
 import { get } from "../../../Utils/rest-util";
 
-const CampaignList = (props) => {
-  const history = useHistory();
+const CampaignResultList = (props) => {
+  const { campaign } = props;
+  const campaignId = campaign.id;
   const [dataItems, setDataItems] = useState([]);
   useEffect(() => {
-    const { CAMPAIGN } = urlProperties;
-    get(CAMPAIGN)
+    const { CAMPAIGN_RESULT } = urlProperties;
+    get(CAMPAIGN_RESULT, {
+      campaignId
+    })
       .then(resp => {
         setDataItems(resp);
       })
-  }, []);
+  }, [campaignId]);
 
   const headers = [
     {
@@ -59,12 +63,9 @@ const CampaignList = (props) => {
   ];
   return (
     <div>
-      <ListView headers={headers} dataItems={dataItems} onRowClick={(e, campaign) => {
-        e.preventDefault();
-        history.push(`campaign-result/${campaign.id}`)
-      }} />
+      <ListView headers={headers} dataItems={dataItems} />
     </div>
   )
 }
 
-export default CampaignList;
+export default CampaignResultList;

@@ -39,7 +39,9 @@ const OfferList = (props) => {
   ];
   return (
     <div>
-      <ListView headers={headers} dataItems={dataItems} />
+      <ListView headers={headers} dataItems={dataItems} onRowClick={(e, offer) => {
+        alert(offer.name)
+      }} />
     </div>
   )
 }

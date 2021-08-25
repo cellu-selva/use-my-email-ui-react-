@@ -4,6 +4,7 @@ import {
 } from "react-router-dom";
 import PrivateRoute from '../../Route/PrivateRoute';
 import CampaignList from "./Campaign/Campaign";
+import CampaignResultList from "./CampaignResult/CampaignResult";
 import DomainList from "./Domain/Domain";
 import EmailTemplateList from "./EmailTemplate/EmailTemplate";
 import MailClientList from "./MailClient/MailClient";
@@ -25,6 +26,7 @@ const Dashboard = (props) => {
         </div>
         <div>
           <PrivateRoute exact path={`${match.path}/campaign`} component={CampaignList}></PrivateRoute>
+          <PrivateRoute exact path={`${match.path}/campaign-results/:campaignId`} component={CampaignResultList}></PrivateRoute>
           <PrivateRoute exact path={`${match.path}/domain`} component={DomainList}></PrivateRoute>
           <PrivateRoute exact path={`${match.path}/email-template`} component={EmailTemplateList}></PrivateRoute>
           <PrivateRoute exact path={`${match.path}/mail-client`} component={MailClientList}></PrivateRoute>
