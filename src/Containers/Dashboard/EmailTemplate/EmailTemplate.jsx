@@ -5,11 +5,11 @@ import ListView from "../../../PresentationalComponents/ListView";
 import { urlProperties } from "../../../Utils/constant";
 import { get } from "../../../Utils/rest-util";
 
-const MailClientList = (props) => {
+const EmailTemplateList = (props) => {
   const [dataItems, setDataItems] = useState([]);
   useEffect(() => {
-    const { MAIL_CLIENT } = urlProperties;
-    get(MAIL_CLIENT)
+    const { EMAIL_TEMPLATE } = urlProperties;
+    get(EMAIL_TEMPLATE)
       .then(resp => {
         setDataItems(resp);
       })
@@ -25,8 +25,16 @@ const MailClientList = (props) => {
       display: "Status"
     },
     {
-      key: "mailingServer.displayName",
-      display: "Server Name"
+      key: "subject",
+      display: "Subject"
+    },
+    {
+      key: "message",
+      display: "Message"
+    },
+    {
+      key: "type",
+      display: "Type"
     },
     {
       key: "updatedAt",
@@ -44,4 +52,4 @@ const MailClientList = (props) => {
   )
 }
 
-export default MailClientList;
+export default EmailTemplateList;

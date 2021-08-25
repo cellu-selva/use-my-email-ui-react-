@@ -1,14 +1,14 @@
 export const urlProperties = {
   API_ENDPOINT: process.env.REACT_APP_API_ENDPOINT || 'http://localhost:4000',
-  USER_API: 'users',
+  CAMPAIGN: 'campaigns',
+  DOMAIN: 'domains',
+  EMAIL_TEMPLATE: 'email-templates',
   LOGIN: 'login',
-  TEST_EMAIL: 'test-emails',
-  SUBSCRIBER: 'subscribers',
+  MAIL_SERVER: 'mailing-servers',
+  MAIL_CLIENT: 'mail-clients',
   OFFER: 'offers',
-  SPONSOR: 'sponsor',
-  MAIL_SERVER: 'mail-server',
-  MAIL_CLIENT: 'mail-client',
-  EMAIL_TEMPLATE: 'email-template',
-  DOMAIN: 'domain',
-  CAMPAIGN: 'campaign'
+  SPONSOR: 'sponsors',
+  SUBSCRIBER: 'subscribers',
+  TEST_EMAIL: 'test-emails',
+  USER_API: 'users',
 };
