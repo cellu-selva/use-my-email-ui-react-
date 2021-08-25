@@ -4,4 +4,11 @@ export const urlProperties = {
   LOGIN: 'login',
   TEST_EMAIL: 'test-emails',
   SUBSCRIBER: 'subscribers',
+  OFFER: 'offers',
+  SPONSOR: 'sponsor',
+  MAIL_SERVER: 'mail-server',
+  MAIL_CLIENT: 'mail-client',
+  EMAIL_TEMPLATE: 'email-template',
+  DOMAIN: 'domain',
+  CAMPAIGN: 'campaign'
 };

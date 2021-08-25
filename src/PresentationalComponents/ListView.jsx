@@ -22,9 +22,10 @@ const ListView = (props) => {
           {
             dataItems.map((item) => (
               <tr key={item.id}>
-                {headers.map((header) => (
-                  <td key={header.key + item.id} className="border px-8 py-4">{item[header.key] || ''}</td>
-                ))}
+                {headers.map((header) => {
+                  const value = item[header.key] ? item[header.key].toString() : ''
+                  return <td key={header.key + item.id} className="border px-8 py-4">{value}</td>
+                })}
               </tr>
             ))
           }

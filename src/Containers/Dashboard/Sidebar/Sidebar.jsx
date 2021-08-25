@@ -10,10 +10,31 @@ const Sidebar = () => {
             <Link to="/dashboard">Dashboard</Link>
           </li>
           <li>
+            <Link to="/dashboard/campaign">Campaign</Link>
+          </li>
+          <li>
+            <Link to="/dashboard/doomain">Domain</Link>
+          </li>
+          <li>
+            <Link to="/dashboard/email-template">Email Temaplate</Link>
+          </li>
+          <li>
+            <Link to="/dashboard/mail-client">Mail Client</Link>
+          </li>
+          <li>
+            <Link to="/dashboard/mail-server">Mail Server</Link>
+          </li>
+          <li>
+            <Link to="/dashboard/offers">Offers</Link>
+          </li>
+          <li>
             <Link to="/dashboard/test-email">Test Email</Link>
           </li>
           <li>
             <Link to="/dashboard/subscriber">Subscriber</Link>
+          </li>
+          <li>
+            <Link to="/dashboard/sponsor">Sponsor</Link>
           </li>
         </ul>
       </nav>
