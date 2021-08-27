@@ -1,19 +1,17 @@
 import React from "react";
-import {
-  Redirect, useRouteMatch
-} from "react-router-dom";
+import { useRouteMatch } from "react-router-dom";
 import PrivateRoute from '../../Route/PrivateRoute';
-import CampaignList from "./Campaign/Campaign";
-import CampaignResultList from "./CampaignResult/CampaignResult";
-import DomainList from "./Domain/Domain";
-import EmailTemplateList from "./EmailTemplate/EmailTemplate";
-import MailClientList from "./MailClient/MailClient";
-import MailServerList from "./MailServer/MailServer";
-import OfferList from "./Offer/Offer";
-import Sidebar from './Sidebar/Sidebar';
-import SponsorList from "./Sponsor/Sponsor";
-import SubscriberList from "./Subscriber/Subscriber";
-import TestEmailList from './TestEmailList/TestEmailList';
+import CampaignList from "./Campaign/Campaigns";
+import CampaignResultList from "./CampaignResult/CampaignResults";
+import DomainList from "./Domain/Domains";
+import EmailTemplateList from "./EmailTemplate/EmailTemplates";
+import MailClientList from "./MailClient/MailClients";
+import MailServerList from "./MailServer/MailServers";
+import OfferList from "./Offer/Offers";
+import Sidebar from './Sidebar/Sidebars';
+import SponsorList from "./Sponsor/Sponsors";
+import SubscriberList from "./Subscriber/Subscribers";
+import TestEmailList from './TestEmailList/TestEmailLists';
 
 const Dashboard = (props) => {
   const match = useRouteMatch();
@@ -25,6 +23,7 @@ const Dashboard = (props) => {
           <Sidebar />
         </div>
         <div>
+          {/* list view route */}
           <PrivateRoute exact path={`${match.path}/campaign`} component={CampaignList}></PrivateRoute>
           <PrivateRoute exact path={`${match.path}/campaign-result/:campaignId`} component={CampaignResultList}></PrivateRoute>
           <PrivateRoute exact path={`${match.path}/domain`} component={DomainList}></PrivateRoute>
@@ -35,7 +34,7 @@ const Dashboard = (props) => {
           <PrivateRoute exact path={`${match.path}/test-email`} component={TestEmailList}></PrivateRoute>
           <PrivateRoute exact path={`${match.path}/subscriber`} component={SubscriberList}></PrivateRoute>
           <PrivateRoute exact path={`${match.path}/sponsor`} component={SponsorList}></PrivateRoute>
-          <Redirect to={`${match.path}`}></Redirect>
+
           {props.children}
         </div>
       </div>
