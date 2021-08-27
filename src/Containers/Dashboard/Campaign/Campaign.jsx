@@ -61,7 +61,7 @@ const CampaignList = (props) => {
     <div>
       <ListView headers={headers} dataItems={dataItems} onRowClick={(e, campaign) => {
         e.preventDefault();
-        history.push(`campaign-result/${campaign.id}`)
+        history.push(`campaign-result/${campaign.id}`);
       }} />
     </div>
   )

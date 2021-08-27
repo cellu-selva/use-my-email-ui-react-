@@ -1,6 +1,6 @@
 import React from "react";
 import {
-  useRouteMatch
+  Redirect, useRouteMatch
 } from "react-router-dom";
 import PrivateRoute from '../../Route/PrivateRoute';
 import CampaignList from "./Campaign/Campaign";
@@ -26,7 +26,7 @@ const Dashboard = (props) => {
         </div>
         <div>
           <PrivateRoute exact path={`${match.path}/campaign`} component={CampaignList}></PrivateRoute>
-          <PrivateRoute exact path={`${match.path}/campaign-results/:campaignId`} component={CampaignResultList}></PrivateRoute>
+          <PrivateRoute exact path={`${match.path}/campaign-result/:campaignId`} component={CampaignResultList}></PrivateRoute>
           <PrivateRoute exact path={`${match.path}/domain`} component={DomainList}></PrivateRoute>
           <PrivateRoute exact path={`${match.path}/email-template`} component={EmailTemplateList}></PrivateRoute>
           <PrivateRoute exact path={`${match.path}/mail-client`} component={MailClientList}></PrivateRoute>
@@ -35,6 +35,7 @@ const Dashboard = (props) => {
           <PrivateRoute exact path={`${match.path}/test-email`} component={TestEmailList}></PrivateRoute>
           <PrivateRoute exact path={`${match.path}/subscriber`} component={SubscriberList}></PrivateRoute>
           <PrivateRoute exact path={`${match.path}/sponsor`} component={SponsorList}></PrivateRoute>
+          <Redirect to={`${match.path}`}></Redirect>
           {props.children}
         </div>
       </div>

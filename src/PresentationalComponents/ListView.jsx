@@ -41,7 +41,9 @@ const ListView = (props) => {
               </tr>
             ))
               :
-              <tr key={'nodata'}>Nodata</tr>
+              <tr key={'nodata'}>
+                <td>Nodata</td>
+              </tr>
           }
         </tbody>
       </table>
