@@ -22,9 +22,9 @@ export const constructQueryParam = (url, params) => {
 }
 
 
-export const post = async (url, data) => {
+export const post = async (api, data) => {
   try {
-    const resp = await fetch(`${API_ENDPOINT}/${url}`, {
+    const resp = await fetch(`${API_ENDPOINT}/${api}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -58,10 +58,9 @@ export const get = async (api, params) => {
   }
 }
 
-export const put = async (api, data, params) => {
+export const put = async (api, data) => {
   try {
-    const url = constructQueryParam(`${API_ENDPOINT}/${api}`, params);
-    const resp = await fetch(`${API_ENDPOINT}/${url}`, {
+    const resp = await fetch(`${API_ENDPOINT}/${api}`, {
       method: 'put',
       headers: {
         'Content-Type': 'application/json'
@@ -69,6 +68,7 @@ export const put = async (api, data, params) => {
       body: JSON.stringify(data)
     })
     const parsedResponse = await resp.json();
+    debugger
     return parsedResponse;
   } catch (error) {
     // handle basic error and toast it over here

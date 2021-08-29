@@ -1,26 +1,34 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { urlProperties } from "../../../Utils/constant";
-import { post } from '../../../Utils/rest-util';
+import { post, put } from "../../../Utils/rest-util";
 
-const Domain = () => {
+const Domain = (props) => {
+  const {
+    readOnly,
+    childData,
+    closeModal
+  } = props;
+  const [domain, setDomain] = useState(JSON.parse(JSON.stringify(childData)));
 
-  const [domain, setDomain] = useState({});
-
-  useEffect(() => {
+  const saveData = () => {
     const { DOMAIN } = urlProperties;
-    post(DOMAIN, domain)
+    const method = domain.id ? put : post;
+    const url = domain.id ? `${DOMAIN}/${domain.id}` : `${DOMAIN}`;
+    method(url, domain)
       .then(resp => {
-
+        debugger
       })
-  }, []);
-
+      .finally(closeModal)
+  }
   return (
     <div className="">
-      <form className="">
+      {/* <form className=""> */}
         <div className="">
           <label className="" htmlFor="domain-name">Name</label>
           <input className="" type="text" id="domain-name"
-            onClick={(e) => {
+          readOnly={readOnly}
+          value={domain.name}
+          onChange={(e) => {
               setDomain({
                 ...domain,
                 name: e.target.value
@@ -30,7 +38,9 @@ const Domain = () => {
         <div className="">
           <label className="" htmlFor="domain-url">URL</label>
           <input className="" type="text" id="domain-url"
-            onClick={(e) => {
+          readOnly={readOnly}
+          value={domain.url}
+          onChange={(e) => {
               setDomain({
                 ...domain,
                 url: e.target.value
@@ -40,7 +50,9 @@ const Domain = () => {
         <div className="">
           <label className="" htmlFor="domain-ip">IP Address</label>
           <input className="" type="text" id="domain-ip"
-            onClick={(e) => {
+          readOnly={readOnly}
+          value={domain.ipAddress ? domain.ipAddress[0] : ""}
+          onChange={(e) => {
               setDomain({
                 ...domain,
                 ipAddress: [e.target.value]
@@ -50,14 +62,23 @@ const Domain = () => {
         <div className="">
           <label className="" htmlFor="domain-is-active">Status</label>
           <input className="" type="checkbox" id="domain-is-active"
-            onClick={(e) => {
+          readOnly={readOnly}
+          checked={domain.isActive}
+          onChange={(e) => {
               setDomain({
                 ...domain,
-                isActive: e.target.value
+                isActive: e.target.checked
               });
             }} />
         </div>
-      </form>
+      {
+        !readOnly ?
+          <button onClick={(e) => {
+            saveData();
+          }}>{domain.id ? 'Update' : 'Create'}</button>
+          : ""
+      }
+      {/* </form> */}
     </div>
   );
 }

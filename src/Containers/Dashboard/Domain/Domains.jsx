@@ -1,19 +1,23 @@
-
-
 import React, { useEffect, useState } from "react";
 import ListView from "../../../PresentationalComponents/ListView";
 import { urlProperties } from "../../../Utils/constant";
-import { get } from "../../../Utils/rest-util";
+import { deleteItem, get } from "../../../Utils/rest-util";
+import Domain from './Domain';
+
+const { DOMAIN } = urlProperties;
 
 const DomainList = (props) => {
   const [dataItems, setDataItems] = useState([]);
   useEffect(() => {
-    const { DOMAIN } = urlProperties;
     get(DOMAIN)
       .then(resp => {
         setDataItems(resp);
       })
   }, []);
+
+  const deleteCallback = (id) => {
+    deleteItem(`${DOMAIN}/${id}`)
+  }
 
   const headers = [
     {
@@ -43,7 +47,10 @@ const DomainList = (props) => {
   ];
   return (
     <div>
-      <ListView headers={headers} dataItems={dataItems} />
+      <ListView headers={headers} dataItems={dataItems}
+        deleteCallback={deleteCallback}
+        ChildComponent={Domain}
+      />
     </div>
   )
 }
