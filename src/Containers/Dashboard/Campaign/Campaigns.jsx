@@ -2,18 +2,25 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import ListView from "../../../PresentationalComponents/ListView";
 import { urlProperties } from "../../../Utils/constant";
-import { get } from "../../../Utils/rest-util";
+import { deleteItem, get } from "../../../Utils/rest-util";
+import Campaign from "./Campaign";
+
+const { CAMPAIGN } = urlProperties;
 
 const CampaignList = (props) => {
   const history = useHistory();
   const [dataItems, setDataItems] = useState([]);
+
   useEffect(() => {
-    const { CAMPAIGN } = urlProperties;
     get(CAMPAIGN)
       .then(resp => {
         setDataItems(resp);
       })
   }, []);
+
+  const deleteCallback = (id) => {
+    deleteItem(`${CAMPAIGN}/${id}`)
+  }
 
   const headers = [
     {
@@ -33,7 +40,7 @@ const CampaignList = (props) => {
       display: "Body Domain"
     },
     {
-      key: "spanCheckInterval",
+      key: "spamCheckInterval",
       display: "Spam Check Interval"
     },
     {
@@ -59,7 +66,12 @@ const CampaignList = (props) => {
   ];
   return (
     <div>
-      <ListView headers={headers} dataItems={dataItems} onRowClick={(e, campaign) => {
+      <ListView
+        headers={headers}
+        dataItems={dataItems}
+        deleteCallback={deleteCallback}
+        ChildComponent={Campaign}
+        onRowClick={(e, campaign) => {
         e.preventDefault();
         history.push(`campaign-result/${campaign.id}`);
       }} />

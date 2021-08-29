@@ -15,20 +15,19 @@ const Domain = (props) => {
     const method = domain.id ? put : post;
     const url = domain.id ? `${DOMAIN}/${domain.id}` : `${DOMAIN}`;
     method(url, domain)
-      .then(resp => {
-        debugger
-      })
+      .then(resp => { })
       .finally(closeModal)
   }
+
   return (
     <div className="">
-      {/* <form className=""> */}
+      <form className="">
         <div className="">
           <label className="" htmlFor="domain-name">Name</label>
           <input className="" type="text" id="domain-name"
-          readOnly={readOnly}
-          value={domain.name}
-          onChange={(e) => {
+            readOnly={readOnly}
+            value={domain.name}
+            onChange={(e) => {
               setDomain({
                 ...domain,
                 name: e.target.value
@@ -38,9 +37,9 @@ const Domain = (props) => {
         <div className="">
           <label className="" htmlFor="domain-url">URL</label>
           <input className="" type="text" id="domain-url"
-          readOnly={readOnly}
-          value={domain.url}
-          onChange={(e) => {
+            readOnly={readOnly}
+            value={domain.url}
+            onChange={(e) => {
               setDomain({
                 ...domain,
                 url: e.target.value
@@ -50,9 +49,9 @@ const Domain = (props) => {
         <div className="">
           <label className="" htmlFor="domain-ip">IP Address</label>
           <input className="" type="text" id="domain-ip"
-          readOnly={readOnly}
-          value={domain.ipAddress ? domain.ipAddress[0] : ""}
-          onChange={(e) => {
+            readOnly={readOnly}
+            value={domain.ipAddress ? domain.ipAddress[0] : ""}
+            onChange={(e) => {
               setDomain({
                 ...domain,
                 ipAddress: [e.target.value]
@@ -62,23 +61,24 @@ const Domain = (props) => {
         <div className="">
           <label className="" htmlFor="domain-is-active">Status</label>
           <input className="" type="checkbox" id="domain-is-active"
-          readOnly={readOnly}
-          checked={domain.isActive}
-          onChange={(e) => {
+            readOnly={readOnly}
+            checked={domain.isActive}
+            onChange={(e) => {
               setDomain({
                 ...domain,
                 isActive: e.target.checked
               });
             }} />
         </div>
-      {
-        !readOnly ?
-          <button onClick={(e) => {
-            saveData();
-          }}>{domain.id ? 'Update' : 'Create'}</button>
-          : ""
-      }
-      {/* </form> */}
+        {
+          !readOnly ?
+            <button onClick={(e) => {
+              e.preventDefault();
+              saveData();
+            }}>{domain.id ? 'Update' : 'Create'}</button>
+            : ""
+        }
+      </form>
     </div>
   );
 }

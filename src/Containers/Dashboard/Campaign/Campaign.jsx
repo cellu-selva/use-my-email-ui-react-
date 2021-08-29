@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { urlProperties } from "../../../Utils/constant";
-import { get } from '../../../Utils/rest-util';
+import { get, post, put } from '../../../Utils/rest-util';
 
-const Campaign = () => {
-
-  const [campaign, setCampaign] = useState({});
+const Campaign = (props) => {
+  const {
+    readOnly,
+    childData,
+    closeModal
+  } = props;
+  const [campaign, setCampaign] = useState(JSON.parse(JSON.stringify(childData)));
   const [domains, setDomains] = useState([]);
   const [testEmails, setTestEmails] = useState([]);
   const [offers, setOffers] = useState([]);
@@ -82,102 +86,141 @@ const Campaign = () => {
       })
   }, []);
 
+  const saveData = () => {
+    const { CAMPAIGN } = urlProperties;
+    const method = campaign.id ? put : post;
+    const url = campaign.id ? `${CAMPAIGN}/${campaign.id}` : `${CAMPAIGN}`;
+    method(url, campaign)
+    // .then(resp => { })
+    // .finally(closeModal)
+  }
+
   return (
     <div className="">
       <form className="">
         <div className="">
           <label className="" htmlFor="campaign-name">Campaign Name</label>
           <input className="" type="text" id="campaign-name"
-            onClick={(e) => {
+            readOnly={readOnly}
+            value={campaign.name}
+            onChange={(e) => {
               setCampaign({
                 ...campaign,
-                isActive: e.target.value
+                name: e.target.value
               });
             }} />
         </div>
         <div className="">
           <label className="" htmlFor="campaign-subject">Campaign Subject</label>
           <input className="" type="text" id="campaign-subject"
-            onClick={(e) => {
+            readOnly={readOnly}
+            value={campaign.subject}
+            onChange={(e) => {
               setCampaign({
                 ...campaign,
-                isActive: e.target.value
+                subject: e.target.value
               });
             }} />
         </div>
         <div className="">
           <label className="" htmlFor="campaign-from-mail">From Mail</label>
-          <input className="" type="text" id="campaign-from-mail"
-            onClick={(e) => {
+          <input className="" type="email" id="campaign-from-mail"
+            readOnly={readOnly}
+            value={campaign.fromMail}
+            onChange={(e) => {
               setCampaign({
                 ...campaign,
-                isActive: e.target.value
+                fromMail: e.target.value
               });
             }} />
         </div>
         <div className="">
           <label className="" htmlFor="campaign-mail-reply-to"> Mail Reply To</label>
-          <input className="" type="text" id="campaign-mail-reply-to"
-            onClick={(e) => {
+          <input className="" type="email" id="campaign-mail-reply-to"
+            readOnly={readOnly}
+            value={campaign.mailReplyTo}
+            onChange={(e) => {
               setCampaign({
                 ...campaign,
-                isActive: e.target.value
+                mailReplyTo: e.target.value
               });
             }} />
         </div>
         <div className="">
           <label className="" htmlFor="campaign-body-domain">Body Domain</label>
           <input className="" type="text" id="campaign-body-domain"
-            onClick={(e) => {
+            readOnly={readOnly}
+            value={campaign.bodyDomain}
+            onChange={(e) => {
               setCampaign({
                 ...campaign,
-                isActive: e.target.value
+                bodyDomain: e.target.value
               });
             }} />
         </div>
         <div className="">
           <label className="" htmlFor="campaign-spam-check-interval">Spam check Interval</label>
-          <input className="" type="text" id="campaign-spam-check-interval"
-            onClick={(e) => {
+          <input className="" type="number" id="campaign-spam-check-interval"
+            readOnly={readOnly}
+            value={campaign.spamCheckInterval}
+            onChange={(e) => {
               setCampaign({
                 ...campaign,
-                isActive: e.target.value
+                spamCheckInterval: Number(e.target.value),
               });
             }} />
         </div>
         <div className="">
           <label className="" htmlFor="campaign-mails-per-minute">Mails Per Minute</label>
-          <input className="" type="text" id="campaign-mails-per-minute"
-            onClick={(e) => {
+          <input className="" type="number" id="campaign-mails-per-minute"
+            readOnly={readOnly}
+            value={campaign.noOfMailPerMinute}
+            onChange={(e) => {
               setCampaign({
                 ...campaign,
-                isActive: e.target.value
+                noOfMailPerMinute: Number(e.target.value),
               });
             }} />
         </div>
         <div className="">
           <label className="" htmlFor="campaign-message">Message</label>
           <input className="" type="text" id="campaign-message"
-            onClick={(e) => {
+            readOnly={readOnly}
+            value={campaign.message}
+            onChange={(e) => {
               setCampaign({
                 ...campaign,
-                isActive: e.target.value
+                message: e.target.value
               });
             }} />
         </div>
-        <div className="">
-          <label className="" htmlFor="campaign-status">Status</label>
-          <input className="" type="text" id="campaign-status"
-            onClick={(e) => {
-              setCampaign({
-                ...campaign,
-                isActive: e.target.value
-              });
-            }} />
-        </div>
+        {
+          campaign.id
+            ? <div className="">
+              <label className="" htmlFor="campaign-status">Status</label>
+              <input className="" type="text" id="campaign-status"
+                readOnly={true}
+                value={campaign.status}
+                onChange={(e) => {
+                  setCampaign({
+                    ...campaign,
+                    status: e.target.value
+                  });
+                }} />
+            </div>
+            : ""
+        }
         <div className="">
           <label className="" htmlFor="campaign-domains">Domains</label>
-          <select className="">
+          <select className=""
+            readOnly={readOnly}
+            value={campaign.domainId}
+            onChange={(e) => {
+              setCampaign({
+                ...campaign,
+                domainId: e.target.value,
+              })
+            }}>
             <option value="">select</option>
             {
               domains.map((item) => (
@@ -188,7 +231,15 @@ const Campaign = () => {
         </div>
         <div className="">
           <label className="" htmlFor="campaign-domains">Email Templates</label>
-          <select className="">
+          <select className=""
+            readOnly={readOnly}
+            value={campaign.emailTemplateId}
+            onChange={(e) => {
+              setCampaign({
+                ...campaign,
+                emailTemplateId: e.target.value,
+              })
+            }}>
             <option value="">select</option>
             {
               emailTemplates.map((item) => (
@@ -199,7 +250,15 @@ const Campaign = () => {
         </div>
         <div className="">
           <label className="" htmlFor="campaign-domains">Offer</label>
-          <select className="">
+          <select className=""
+            readOnly={readOnly}
+            value={campaign.offerId}
+            onChange={(e) => {
+              setCampaign({
+                ...campaign,
+                offerId: e.target.value,
+              })
+            }}>
             <option value="">select</option>
             {
               offers.map((item) => (
@@ -210,7 +269,15 @@ const Campaign = () => {
         </div>
         <div className="">
           <label className="" htmlFor="campaign-domains">Test Emails</label>
-          <select className="">
+          <select className=""
+            readOnly={readOnly}
+            value={campaign.testEmailId}
+            onChange={(e) => {
+              setCampaign({
+                ...campaign,
+                testEmailId: e.target.value,
+              })
+            }}>
             <option value="">select</option>
             {
 
@@ -220,7 +287,12 @@ const Campaign = () => {
             }
           </select>
         </div>
+        <button onClick={(e) => {
+          e.preventDefault();
+          saveData();
+        }}>{campaign.id ? 'Update' : 'Create'}</button>
       </form>
+      {JSON.stringify(campaign)}
     </div>
   );
 }

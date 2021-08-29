@@ -5,7 +5,7 @@ const ListView = (props) => {
   const {
     headers = [],
     dataItems = [],
-    onRowClick,
+    onRowClick = () => { },
     deleteCallback,
     ChildComponent,
   } = props;
