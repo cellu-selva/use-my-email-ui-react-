@@ -7,7 +7,6 @@ import { post } from "../../Utils/rest-util";
 const SignIn = () => {
   const { auth, setAuth } = useContext(AppContext);
   const history = useHistory();
-  debugger
   if (auth && auth.token) {
     history.push('/dashboard');
   }
@@ -15,7 +14,6 @@ const SignIn = () => {
     const { LOGIN, USER_API } = urlProperties;
     const response = await post(`${USER_API}/${LOGIN}`, credential);
     setAuth(response);
-    debugger
     history.replace('/dashboard');
   }
 

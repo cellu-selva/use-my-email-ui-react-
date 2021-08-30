@@ -44,7 +44,7 @@ const CampaignList = (props) => {
       display: "Spam Check Interval"
     },
     {
-      key: "noOfMailsPerMinute",
+      key: "noOfMailPerMinute",
       display: "Mails Per/Min"
     },
     {

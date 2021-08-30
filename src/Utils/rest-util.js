@@ -42,12 +42,15 @@ export const post = async (api, data) => {
 
 export const get = async (api, params) => {
   try {
-    const url = constructQueryParam(api, params);
+    let url = `${api}`;
+    if (params && Object.keys(params) && Object.keys(params).length > 0) {
+      url = url + "?filter=" + encodeURI(JSON.stringify(params));
+    }
     const resp = await fetch(`${API_ENDPOINT}/${url}`, {
       method: 'get',
       headers: {
         'Content-Type': 'application/json'
-      }
+      },
     })
     const parsedResponse = await resp.json();
     return parsedResponse;
@@ -68,7 +71,6 @@ export const put = async (api, data) => {
       body: JSON.stringify(data)
     })
     const parsedResponse = await resp.json();
-    debugger
     return parsedResponse;
   } catch (error) {
     // handle basic error and toast it over here

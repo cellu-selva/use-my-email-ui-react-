@@ -15,7 +15,6 @@ const MailClientList = (props) => {
       limit: 100,
       order: "desc",
       where: {
-        isDeleted: false,
         isActive: true,
       },
       include: [

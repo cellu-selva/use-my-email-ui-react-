@@ -27,18 +27,12 @@ const MailClient = (props) => {
       limit: 100,
       order: "desc",
       where: {
-        isDeleted: false,
         isActive: true,
       },
       fields: {
         displayName: true,
         id: true
-      },
-      include: [
-        {
-          relation: "mailingServer"
-        }
-      ]
+      }
     })
       .then(resp => {
         setMailServers(resp);

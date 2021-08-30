@@ -12,7 +12,6 @@ const CampaignResultList = (props) => {
   const {
     campaignId
   } = match.params;
-  debugger
   if (!campaignId) {
     history.push('campaign')
   }
