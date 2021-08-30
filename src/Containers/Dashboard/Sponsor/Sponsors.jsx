@@ -3,17 +3,22 @@
 import React, { useEffect, useState } from "react";
 import ListView from "../../../PresentationalComponents/ListView";
 import { urlProperties } from "../../../Utils/constant";
-import { get } from "../../../Utils/rest-util";
+import { deleteItem, get } from "../../../Utils/rest-util";
+import Sponsor from "./Sponsor";
 
+const { SPONSOR } = urlProperties;
 const SponsorList = (props) => {
   const [dataItems, setDataItems] = useState([]);
   useEffect(() => {
-    const { SPONSOR } = urlProperties;
     get(SPONSOR)
       .then(resp => {
         setDataItems(resp);
       })
   }, []);
+
+  const deleteCallback = (id) => {
+    deleteItem(`${SPONSOR}/${id}`)
+  }
 
   const headers = [
     {
@@ -31,7 +36,12 @@ const SponsorList = (props) => {
   ];
   return (
     <div>
-      <ListView headers={headers} dataItems={dataItems} />
+      <ListView headers={headers} dataItems={dataItems}
+        deleteCallback={deleteCallback}
+        ChildComponent={Sponsor}
+        onRowClick={(e, offer) => {
+          alert(offer.name)
+        }} />
     </div>
   )
 }

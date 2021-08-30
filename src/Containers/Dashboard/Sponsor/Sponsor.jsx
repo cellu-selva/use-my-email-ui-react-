@@ -1,17 +1,22 @@
 import React, { useState } from 'react';
 import { urlProperties } from "../../../Utils/constant";
-import { post } from '../../../Utils/rest-util';
+import { post, put } from '../../../Utils/rest-util';
 
-const Sponsor = () => {
-
-  const [sponsor, setSponsor] = useState([]);
+const { SPONSOR } = urlProperties;
+const Sponsor = (props) => {
+  const {
+    readOnly,
+    childData,
+    closeModal
+  } = props;
+  const [sponsor, setSponsor] = useState(JSON.parse(JSON.stringify(childData)));
 
   const saveData = () => {
-    const { SPONSOR } = urlProperties;
-    post(SPONSOR, sponsor)
-      .then(resp => {
-
-      })
+    const method = sponsor.id ? put : post;
+    const url = sponsor.id ? `${SPONSOR}/${sponsor.id}` : `${SPONSOR}`;
+    method(url, sponsor)
+      .then(resp => { })
+      .finally(closeModal)
   }
 
   return (
@@ -20,13 +25,23 @@ const Sponsor = () => {
         <div className="">
           <label className="" htmlFor="name">Sponsor Name</label>
           <input className="" type="text" id="name"
-            onClick={(e) => {
+            readOnly={readOnly}
+            value={sponsor.name}
+            onChange={(e) => {
               setSponsor({
                 ...sponsor,
-                sponsorName: e.target.value
+                name: e.target.value
               });
             }} />
         </div>
+        {
+          !readOnly ?
+            <button onClick={(e) => {
+              e.preventDefault();
+              saveData();
+            }}>{sponsor.id ? 'Update' : 'Create'}</button>
+            : ""
+        }
       </form>
     </div>
   );
