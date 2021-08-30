@@ -3,16 +3,22 @@
 import React, { useEffect, useState } from "react";
 import ListView from "../../../PresentationalComponents/ListView";
 import { urlProperties } from "../../../Utils/constant";
-import { get } from "../../../Utils/rest-util";
+import { deleteItem, get } from "../../../Utils/rest-util";
+import TestEmail from "./TestEmail";
+
+const { TEST_EMAIL } = urlProperties;
 const TestEmailList = (props) => {
   const [dataItems, setDataItems] = useState([]);
   useEffect(() => {
-    const { TEST_EMAIL } = urlProperties;
     get(TEST_EMAIL)
       .then(resp => {
         setDataItems(resp);
       })
-  }, [])
+  }, []);
+
+  const deleteCallback = (id) => {
+    deleteItem(`${TEST_EMAIL}/${id}`)
+  }
 
   const headers = [
     {
@@ -38,7 +44,12 @@ const TestEmailList = (props) => {
   ];
   return (
     <div>
-      <ListView headers={headers} dataItems={dataItems} />
+      <ListView headers={headers} dataItems={dataItems}
+        deleteCallback={deleteCallback}
+        ChildComponent={TestEmail}
+        onRowClick={(e, offer) => {
+          alert(offer.name)
+        }} />
     </div>
   )
 }
