@@ -3,17 +3,35 @@
 import React, { useEffect, useState } from "react";
 import ListView from "../../../PresentationalComponents/ListView";
 import { urlProperties } from "../../../Utils/constant";
-import { get } from "../../../Utils/rest-util";
+import { deleteItem, get } from "../../../Utils/rest-util";
+import MailClient from "./MailClient";
+
+const { MAIL_CLIENT } = urlProperties;
 
 const MailClientList = (props) => {
   const [dataItems, setDataItems] = useState([]);
   useEffect(() => {
-    const { MAIL_CLIENT } = urlProperties;
-    get(MAIL_CLIENT)
+    get(MAIL_CLIENT, {
+      limit: 100,
+      order: "desc",
+      where: {
+        isDeleted: false,
+        isActive: true,
+      },
+      include: [
+        {
+          relation: "mailingServer"
+        }
+      ]
+    })
       .then(resp => {
         setDataItems(resp);
       })
   }, []);
+
+  const deleteCallback = (id) => {
+    deleteItem(`${MAIL_CLIENT}/${id}`)
+  }
 
   const headers = [
     {
@@ -39,7 +57,9 @@ const MailClientList = (props) => {
   ];
   return (
     <div>
-      <ListView headers={headers} dataItems={dataItems} />
+      <ListView headers={headers} dataItems={dataItems}
+        deleteCallback={deleteCallback}
+        ChildComponent={MailClient} />
     </div>
   )
 }

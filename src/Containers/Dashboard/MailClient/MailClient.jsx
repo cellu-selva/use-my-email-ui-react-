@@ -1,11 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { urlProperties } from "../../../Utils/constant";
-import { get, post } from '../../../Utils/rest-util';
+import { get, post, put } from '../../../Utils/rest-util';
 
-const MailClient = () => {
+const MailClient = (props) => {
 
-  const [mailClient, setMailClient] = useState({});
-  const [mailServer, setMailServer] = useState([]);
+  const {
+    readOnly,
+    childData,
+    closeModal
+  } = props;
+  const [mailClient, setMailClient] = useState(JSON.parse(JSON.stringify(childData)));
+  const [mailServers, setMailServers] = useState([]);
+
+  const saveData = () => {
+    const { MAIL_CLIENT } = urlProperties;
+    const method = mailClient.id ? put : post;
+    const url = mailClient.id ? `${MAIL_CLIENT}/${mailClient.id}` : `${MAIL_CLIENT}`;
+    method(url, mailClient)
+      .then(resp => { })
+      .finally(closeModal)
+  }
 
   useEffect(() => {
     const { MAIL_SERVER } = urlProperties;
@@ -19,20 +33,17 @@ const MailClient = () => {
       fields: {
         displayName: true,
         id: true
-      }
+      },
+      include: [
+        {
+          relation: "mailingServer"
+        }
+      ]
     })
       .then(resp => {
-        setMailServer(resp);
+        setMailServers(resp);
       })
   }, []);
-
-  const saveData = () => {
-    const { MAIL_CLIENT } = urlProperties;
-    post(MAIL_CLIENT, mailClient)
-      .then(resp => {
-
-      })
-  }
 
   return (
     <div className="">
@@ -40,7 +51,9 @@ const MailClient = () => {
         <div className="">
           <label className="" htmlFor="name">Name</label>
           <input className="" type="text" id="name"
-            onClick={(e) => {
+            readOnly={readOnly}
+            value={mailClient.name}
+            onChange={(e) => {
               setMailClient({
                 ...mailClient,
                 name: e.target.value
@@ -50,30 +63,56 @@ const MailClient = () => {
         <div className="">
           <label className="" htmlFor="is-active">Status</label>
           <input className="" type="checkbox" id="is-active"
+            readOnly={readOnly}
+            checked={mailClient.isActive}
             onChange={(e) => {
               setMailClient({
                 ...mailClient,
-                isActive: e.target.value
+                isActive: e.target.checked
+              });
+            }} />
+        </div>
+        {/* dummy config */}
+        <div className="">
+          <label className="" htmlFor="is-active">Config</label>
+          <input className="" type="text" id="config"
+            readOnly={readOnly}
+            value={mailClient.config ? mailClient.config.token : ""}
+            onChange={(e) => {
+              setMailClient({
+                ...mailClient,
+                config: { token: e.target.value }
               });
             }} />
         </div>
         <div className="">
           <label className="" htmlFor="mailing-server">Mailing Server</label>
           <select className=""
+            readOnly={readOnly}
+            value={mailClient.mailingServer ? mailClient.mailingServer.name : ""}
             onChange={(e) => {
               setMailClient({
                 ...mailClient,
                 mailingServerId: e.target.value
               });
             }}>
+            <option value="">select</option>
             {
-              mailServer.map((item) => {
-                <option value={item.id}>{item.name}</option>
-              })
+              mailServers.map((item) => (
+                <option value={item.id}>{item.displayName}</option>
+              ))
             }
           </select>
         </div>
         {/* get the config templae based on the mail server selected */}
+        {
+          !readOnly ?
+            <button onClick={(e) => {
+              e.preventDefault();
+              saveData();
+            }}>{mailClient.id ? 'Update' : 'Create'}</button>
+            : ""
+        }
       </form>
     </div>
   );

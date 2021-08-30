@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { urlProperties } from "../../../Utils/constant";
 import { post, put } from '../../../Utils/rest-util';
 
+const { EMAIL_TEMPLATE } = urlProperties;
 const EmailTemplate = (props) => {
   const {
     readOnly,
@@ -11,7 +12,6 @@ const EmailTemplate = (props) => {
   const [emailTemplate, setEmailTemplate] = useState(JSON.parse(JSON.stringify(childData)));
 
   const saveData = () => {
-    const { EMAIL_TEMPLATE } = urlProperties;
     const method = emailTemplate.id ? put : post;
     const url = emailTemplate.id ? `${EMAIL_TEMPLATE}/${emailTemplate.id}` : `${EMAIL_TEMPLATE}`;
     method(url, emailTemplate)

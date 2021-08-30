@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { urlProperties } from "../../../Utils/constant";
 import { get, post, put } from '../../../Utils/rest-util';
 
+const { DOMAIN } = urlProperties;
 const Campaign = (props) => {
   const {
     readOnly,
@@ -15,7 +16,6 @@ const Campaign = (props) => {
   const [emailTemplates, setEmailTemplates] = useState([]);
 
   useEffect(() => {
-    const { DOMAIN } = urlProperties;
     get(DOMAIN, {
       limit: 100,
       order: "desc",
@@ -91,8 +91,8 @@ const Campaign = (props) => {
     const method = campaign.id ? put : post;
     const url = campaign.id ? `${CAMPAIGN}/${campaign.id}` : `${CAMPAIGN}`;
     method(url, campaign)
-    // .then(resp => { })
-    // .finally(closeModal)
+      .then(resp => { })
+      .finally(closeModal)
   }
 
   return (
@@ -292,7 +292,6 @@ const Campaign = (props) => {
           saveData();
         }}>{campaign.id ? 'Update' : 'Create'}</button>
       </form>
-      {JSON.stringify(campaign)}
     </div>
   );
 }

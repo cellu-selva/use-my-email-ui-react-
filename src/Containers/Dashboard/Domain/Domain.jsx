@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { urlProperties } from "../../../Utils/constant";
 import { post, put } from "../../../Utils/rest-util";
 
+const { DOMAIN } = urlProperties;
 const Domain = (props) => {
   const {
     readOnly,
@@ -11,7 +12,6 @@ const Domain = (props) => {
   const [domain, setDomain] = useState(JSON.parse(JSON.stringify(childData)));
 
   const saveData = () => {
-    const { DOMAIN } = urlProperties;
     const method = domain.id ? put : post;
     const url = domain.id ? `${DOMAIN}/${domain.id}` : `${DOMAIN}`;
     method(url, domain)
