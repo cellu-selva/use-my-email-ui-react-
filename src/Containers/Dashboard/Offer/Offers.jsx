@@ -23,23 +23,28 @@ const OfferList = (props) => {
   const headers = [
     {
       key: "name",
-      display: "Name"
+      display: "Name",
+      type: "string"
     },
     {
       key: "trackId",
-      display: "Track Id"
+      display: "Track Id",
+      type: "string"
     },
     {
       key: "isActive",
-      display: "Status"
+      display: "Status",
+      type: "boolean"
     },
     {
       key: "updatedAt",
-      display: "Updated At"
+      display: "Updated At",
+      type: "date"
     },
     {
       key: "actions",
-      display: "Actions"
+      display: "Actions",
+      type: "options"
     },
   ];
   return (

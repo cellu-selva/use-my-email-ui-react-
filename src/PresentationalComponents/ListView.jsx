@@ -44,6 +44,13 @@ const ListView = (props) => {
                       } else {
                         value = item[header.key] ? item[header.key].toString() : '';
                       }
+
+                      switch (header.type) {
+                        case 'date':
+                          value = value ? new Date(value).toLocaleDateString() : ''
+                          break;
+                        default:
+                      }
                       return (
                         header.key !== 'actions'
                           ?

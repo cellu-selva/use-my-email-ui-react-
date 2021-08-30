@@ -17,27 +17,28 @@ const SubscriberList = (props) => {
   const headers = [
     {
       key: "firsName",
-      display: "First Name"
+      display: "First Name",
+      type: "string"
     },
     {
       key: "lasName",
-      display: "Last Name"
+      display: "Last Name",
+      type: "string"
     },
     {
       key: "dob",
-      display: "Date Of Birth"
+      display: "Date Of Birth",
+      type: "string"
     },
     {
       key: "updatedAt",
-      display: "Last Updated"
+      display: "Last Updated",
+      type: "date"
     },
     {
       key: 'city',
-      value: 'City'
-    },
-    {
-      key: "actions",
-      display: "Actions"
+      display: 'City',
+      type: "string"
     },
   ];
   return (

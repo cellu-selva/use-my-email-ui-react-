@@ -23,23 +23,28 @@ const MailServerList = (props) => {
   const headers = [
     {
       key: "key",
-      display: "Key"
+      display: "Key",
+      type: "string"
     },
     {
       key: "displayName",
-      display: "Name"
+      display: "Name",
+      type: "string"
     },
     {
       key: "isActive",
-      display: "Status"
+      display: "Status",
+      type: "boolean"
     },
     {
       key: "updatedAt",
-      display: "Updated At"
+      display: "Updated At",
+      type: "date"
     },
     {
       key: "actions",
-      display: "Actions"
+      display: "Actions",
+      type: "options"
     },
   ];
   return (

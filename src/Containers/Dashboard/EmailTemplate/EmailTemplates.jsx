@@ -24,31 +24,38 @@ const EmailTemplateList = (props) => {
   const headers = [
     {
       key: "name",
-      display: "Name"
+      display: "Name",
+      type: "string"
     },
     {
       key: "isActive",
-      display: "Status"
+      display: "Status",
+      type: "boolean"
     },
     {
       key: "subject",
-      display: "Subject"
+      display: "Subject",
+      type: "string"
     },
     {
       key: "message",
-      display: "Message"
+      display: "Message",
+      type: "string"
     },
     {
       key: "type",
-      display: "Type"
+      display: "Type",
+      type: "string"
     },
     {
       key: "updatedAt",
-      display: "Updated At"
+      display: "Updated At",
+      type: "date"
     },
     {
       key: "actions",
-      display: "Actions"
+      display: "Actions",
+      type: "options"
     },
   ];
   return (

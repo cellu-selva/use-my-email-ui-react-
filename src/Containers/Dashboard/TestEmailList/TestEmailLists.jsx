@@ -23,23 +23,28 @@ const TestEmailList = (props) => {
   const headers = [
     {
       key: "name",
-      display: "Name"
+      display: "Name",
+      type: "string"
     },
     {
       key: "email",
-      display: "Email"
+      display: "Email",
+      type: "string"
     },
     {
       key: "status",
-      display: "Status"
+      display: "Status",
+      type: "string"
     },
     {
       key: "updatedAt",
-      display: "Last Updated"
+      display: "Last Updated",
+      type: "date"
     },
     {
       key: "actions",
-      display: "Actions"
+      display: "Actions",
+      type: "options"
     },
   ];
   return (

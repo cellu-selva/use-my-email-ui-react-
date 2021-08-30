@@ -23,15 +23,18 @@ const SponsorList = (props) => {
   const headers = [
     {
       key: "name",
-      display: "Name"
+      display: "Name",
+      type: "string"
     },
     {
       key: "updatedAt",
-      display: "Updated At"
+      display: "Updated At",
+      type: "date"
     },
     {
       key: "actions",
-      display: "Actions"
+      display: "Actions",
+      type: "options"
     },
   ];
   return (

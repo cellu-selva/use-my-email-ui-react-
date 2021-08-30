@@ -35,23 +35,28 @@ const MailClientList = (props) => {
   const headers = [
     {
       key: "name",
-      display: "Name"
+      display: "Name",
+      type: "string"
     },
     {
       key: "isActive",
-      display: "Status"
+      display: "Status",
+      type: "boolean"
     },
     {
       key: "mailingServer.displayName",
-      display: "Server Name"
+      display: "Server Name",
+      type: "string"
     },
     {
       key: "updatedAt",
-      display: "Updated At"
+      display: "Updated At",
+      type: "date"
     },
     {
       key: "actions",
-      display: "Actions"
+      display: "Actions",
+      type: "options"
     },
   ];
   return (

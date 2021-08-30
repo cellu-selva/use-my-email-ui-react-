@@ -25,43 +25,53 @@ const CampaignList = (props) => {
   const headers = [
     {
       key: "name",
-      display: "Name"
+      display: "Name",
+      type: "string"
     },
     {
       key: "subject",
-      display: "Subject"
+      display: "Subject",
+      type: "string"
     },
     {
       key: "fromMail",
-      display: "From Mail"
+      display: "From Mail",
+      type: "string"
     },
     {
       key: "bodyDomain",
-      display: "Body Domain"
+      display: "Body Domain",
+      type: "string"
     },
     {
       key: "spamCheckInterval",
-      display: "Spam Check Interval"
+      display: "Spam Check Interval",
+      type: "number"
     },
     {
       key: "noOfMailPerMinute",
-      display: "Mails Per/Min"
+      display: "Mails Per/Min",
+      type: "number"
     },
     {
       key: "message",
-      display: "Mesage"
+      display: "Mesage",
+      type: "string"
     },
     {
       key: "status",
-      display: "Status"
+      display: "Status",
+      type: "string"
     },
     {
       key: "updatedAt",
-      display: "Updated At"
+      display: "Updated At",
+      type: "date"
     },
     {
       key: "actions",
-      display: "Actions"
+      display: "Actions",
+      type: "options"
     },
   ];
   return (
