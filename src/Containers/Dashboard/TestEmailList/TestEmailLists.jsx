@@ -37,6 +37,10 @@ const TestEmailList = (props) => {
       type: "string"
     },
     {
+      key: "type",
+      display: "Type",
+      type: "string"
+    }, {
       key: "updatedAt",
       display: "Last Updated",
       type: "date"

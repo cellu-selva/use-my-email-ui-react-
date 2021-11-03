@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { urlProperties } from "../../../Utils/constant";
-import { post, put } from '../../../Utils/rest-util';
+import { get, post, put } from '../../../Utils/rest-util';
 
-const { TEST_EMAIL } = urlProperties;
+const { TEST_EMAIL, AUTHORIZE } = urlProperties;
 const TestEmail = (props) => {
   const {
     readOnly,
@@ -19,6 +19,26 @@ const TestEmail = (props) => {
       .finally(closeModal)
   }
 
+  const authorize = async () => {
+    const { url } = await get(AUTHORIZE)
+    debugger
+    window.open(url, "", "width=500,height=500")
+  }
+
+  const mailTypes = [{
+    id: 'gmail',
+    name: 'gmail'
+  }, {
+    id: 'comcast',
+    name: 'comcast'
+  }, {
+    id: 'yahoo',
+    name: 'yahoo'
+  }, {
+    id: 'zoho',
+    name: 'zoho'
+  }];
+
   // const status = [{
   //   id: 'free',
   //   name: 'Free'
@@ -30,6 +50,7 @@ const TestEmail = (props) => {
 
   return (
     <div className="">
+      <button onClick={authorize}>Authorize</button>
       <form className="">
         <div className="">
           <label className="" htmlFor="name">Name</label>
@@ -56,16 +77,22 @@ const TestEmail = (props) => {
             }} />
         </div>
         <div className="">
-          <label className="" htmlFor="name">Auth Token</label>
-          <input className="" type="text" id="auth-token"
-            readOnly={readOnly}
-            value={testEmail.authToken}
+          <label className="" htmlFor="name">Type</label>
+          <select className=""
+            value={testEmail.type}
             onChange={(e) => {
               setTestEmail({
                 ...testEmail,
-                authToken: e.target.value
+                type: e.target.value
               });
-            }} />
+            }}>
+            <option value="">select</option>
+            {
+              mailTypes.map((item) => (
+                <option value={item.id}>{item.name}</option>
+              ))
+            }
+          </select>
         </div>
         {/* <div className="">
           <label className="" htmlFor="is-active">Status</label>

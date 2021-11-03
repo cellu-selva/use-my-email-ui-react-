@@ -12,4 +12,5 @@ export const urlProperties = {
   SUBSCRIBER: 'subscribers',
   TEST_EMAIL: 'test-emails',
   USER_API: 'users',
+  AUTHORIZE: '/get-offline-oauth-url/gmail'
 };
